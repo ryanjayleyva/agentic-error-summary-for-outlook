@@ -1,0 +1,39 @@
+{
+  "_id": "62e118fbe80268ab0e12e442",
+  "name": "Collect Recent Errors for Each Flow Step",
+  "description": "Reads the step list from Celigo file storage, fetches the open errors for each step, keeps only errors that occurred within the lookback window in the integration settings, and saves them as errorsByBubble.json. When it finishes it starts the flow that sends the summary.",
+  "pageGenerators": [
+    {
+      "_exportId": "f2241750c353c094935833a6",
+      "skipRetries": false
+    }
+  ],
+  "pageProcessors": [
+    {
+      "type": "export",
+      "_exportId": "2d5dcb1fd6af24a161d94528",
+      "responseMapping": {
+        "fields": [
+          {
+            "extract": "data[0].errors",
+            "generate": "openErrors"
+          }
+        ],
+        "lists": []
+      }
+    },
+    {
+      "type": "import",
+      "_importId": "24f8e6216e91399fa4e36a07",
+      "responseMapping": {
+        "fields": [],
+        "lists": []
+      }
+    }
+  ],
+  "runPageGeneratorsInParallel": true,
+  "autoResolveMatchingTraceKeys": true,
+  "_runNextFlowIds": [
+    "ef9fbfab03f7693e78213889"
+  ]
+}
