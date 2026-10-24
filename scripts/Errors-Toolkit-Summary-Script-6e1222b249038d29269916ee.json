@@ -1,0 +1,9 @@
+{
+  "_id": "6e1222b249038d29269916ee",
+  "lastModified": "2026-10-24T16:11:42.139Z",
+  "createdAt": "2026-10-24T15:54:01.844Z",
+  "name": "Errors Toolkit Summary Script",
+  "description": "preSavePage script for the Get Errors From File export. It wraps all records in one flowBubbles list for the AI agent.",
+  "sandbox": false,
+  "postResponseHookToProcessOnChildRecord": false
+}
