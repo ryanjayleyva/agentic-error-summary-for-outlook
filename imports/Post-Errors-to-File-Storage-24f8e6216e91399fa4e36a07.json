@@ -1,0 +1,125 @@
+{
+  "_id": "24f8e6216e91399fa4e36a07",
+  "name": "Post Errors to File Storage",
+  "description": "Saves the errors grouped by flow step as errorsByBubble.json in Celigo file storage. Steps with no open error are skipped.",
+  "_connectionId": "c0bdf086b76e7e8b4c4d8fdb",
+  "apiIdentifier": "ie5104f539",
+  "oneToMany": false,
+  "assistant": "integratorceligoapi",
+  "mappings": [
+    {
+      "extract": "$.bubbleId",
+      "generate": "bubbleId",
+      "dataType": "string",
+      "status": "Active",
+      "sourceDataType": "string"
+    },
+    {
+      "extract": "$.bubbleName",
+      "generate": "bubbleName",
+      "dataType": "string",
+      "status": "Active",
+      "sourceDataType": "string"
+    },
+    {
+      "extract": "$.flowId",
+      "generate": "flowId",
+      "dataType": "string",
+      "status": "Active",
+      "sourceDataType": "string"
+    },
+    {
+      "extract": "$.flowName",
+      "generate": "flowName",
+      "dataType": "string",
+      "status": "Active",
+      "sourceDataType": "string"
+    },
+    {
+      "extract": "$.integrationId",
+      "generate": "integrationId",
+      "dataType": "string",
+      "status": "Active",
+      "sourceDataType": "string"
+    },
+    {
+      "extract": "$.integrationName",
+      "generate": "integrationName",
+      "dataType": "string",
+      "status": "Active",
+      "sourceDataType": "string"
+    },
+    {
+      "generate": "openErrors",
+      "dataType": "objectarray",
+      "status": "Active",
+      "buildArrayHelper": [
+        {
+          "extract": "$.openErrors[*]",
+          "conditional": {
+            "when": "extract_not_empty"
+          },
+          "sourceDataType": "objectarray"
+        }
+      ]
+    }
+  ],
+  "inputContext": "record",
+  "file": {
+    "fileName": "errorsByBubble.json",
+    "skipAggregation": false,
+    "type": "json",
+    "directory": {
+      "pathMode": "relativePath"
+    },
+    "aggregation": {
+      "type": "all"
+    }
+  },
+  "http": {
+    "type": "file",
+    "relativeURI": [
+      "Agentic Error Summary for Outlook"
+    ],
+    "method": [
+      "POST"
+    ],
+    "body": [],
+    "sendPostMappedData": true,
+    "isRest": false,
+    "formType": "assistant",
+    "response": {
+      "resourcePath": [
+        "items"
+      ]
+    }
+  },
+  "filter": {
+    "type": "expression",
+    "expression": {
+      "version": "1",
+      "rules": [
+        "notempty",
+        [
+          "string",
+          [
+            "extract",
+            "openErrors.0.errorId"
+          ]
+        ]
+      ]
+    },
+    "rules": [
+      "notempty",
+      [
+        "string",
+        [
+          "extract",
+          "openErrors.0.errorId"
+        ]
+      ]
+    ],
+    "version": "1"
+  },
+  "adaptorType": "HTTPImport"
+}
