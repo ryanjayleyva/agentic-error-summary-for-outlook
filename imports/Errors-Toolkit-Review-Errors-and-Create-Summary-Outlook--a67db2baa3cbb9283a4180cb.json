@@ -1,0 +1,77 @@
+{
+  "_id": "a67db2baa3cbb9283a4180cb",
+  "name": "Errors Toolkit - Review Errors and Create Summary [Outlook]",
+  "description": "AI agent using OpenAI gpt-5-mini that reads the grouped errors and returns an email subject and an HTML body. It covers the top 10 flows by error count. The instructions are in instructions.md.",
+  "apiIdentifier": "i316874b45",
+  "oneToMany": false,
+  "lookups": [],
+  "mappings": [
+    {
+      "extract": "$",
+      "generate": "record",
+      "dataType": "object",
+      "conditional": {
+        "when": "extract_not_empty"
+      },
+      "status": "Active",
+      "sourceDataType": "object"
+    }
+  ],
+  "inputContext": "record",
+  "aiAgent": {
+    "provider": "openai",
+    "openai": {
+      "instructions": "You will receive incoming integrator.io flow-bubble error data. The input may be an object containing a flowBubbles array, a flowBubbles array itself, or a single bubble object. A bubble identifies a flow and contains its new errors, commonly under openErrors. Each error occurrence may provide a message directly, or summarized input may provide a message with a count.\n\nReturn only the structured JSON required by the configured schema, with exactly two string fields: subject and body_html. This output is for email, not Slack. Do not return Slack Block Kit, Slack markdown, Markdown, commentary, or fields other than subject and body_html.\n\nAnalysis rules:\n- Group errors by flow. Use only flow names present in the input.\n- Compute each flow's total error occurrence count. Count each individual error as one unless the input explicitly supplies a count, in which case use that count. Never invent or estimate counts.\n- Sort flows by total error occurrence count descending.\n- Include at most the top 10 flows.\n- Normalize messages before grouping them. Treat messages as the same underlying error when they differ only by variable tokens such as order numbers, record IDs, internal IDs, SKUs, timestamps, UUIDs, trace keys, or similar long numeric or alphanumeric identifiers. Replace those variable tokens in the displayed pattern with #XXXXX or the closest matching neutral placeholder shape. Do not replace stable error codes or meaningful fixed values merely because they contain digits.\n- Combine the occurrence counts of messages that collapse to the same normalized pattern.\n- Within each flow, sort normalized messages by combined occurrence count descending and show at most the top three.\n- If a flow has more than three distinct normalized messages, clearly state that more distinct errors exist and that integrator.io contains the full list.\n- If more than 10 flows contain errors, clearly state after the listed flows that more flows have errors and that integrator.io contains the full list.\n- Never invent flow names, messages, or counts.\n\nEmail requirements when errors exist:\n- Set subject to a concise subject identifying the message as a Celigo error summary. It may include an input-derived total count, but must not invent one.\n- Set body_html to a complete, readable HTML email suitable for an integration administrator.\n- Include a friendly opening summary.\n- Add a heading for each included flow, its total new-error occurrence count, and a bullet list containing each displayed normalized message and its combined count.\n- HTML-escape all input-derived flow names and messages so they cannot break the email markup. Preserve readability of JSON-like or multiline error messages using safe HTML elements such as code, pre, or styled text; do not output Markdown.\n- End with a note directing the administrator to integrator.io for complete details.\n\nNo-error behavior:\n- If the input is empty, flowBubbles is empty, or no bubble contains any errors, use a concise Celigo error summary subject and set body_html to a complete HTML email that clearly says there are no new integrator.io errors. Still include a closing note directing the administrator to integrator.io for full details.",
+      "model": "gpt-5-mini",
+      "reasoning": {
+        "effort": "low",
+        "summary": "auto"
+      },
+      "maxOutputTokens": 5000,
+      "serviceTier": "default",
+      "output": {
+        "format": {
+          "type": "json_schema",
+          "schemaMode": "manual",
+          "name": "celigo_error_email",
+          "strict": true,
+          "jsonSchema": {
+            "type": "object",
+            "properties": {
+              "body_html": {
+                "type": "string"
+              },
+              "subject": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "subject",
+              "body_html"
+            ],
+            "additionalproperties": false
+          },
+          "schema": {
+            "type": "object",
+            "properties": {
+              "body_html": {
+                "type": "string"
+              },
+              "subject": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "subject",
+              "body_html"
+            ],
+            "additionalproperties": false
+          }
+        },
+        "verbose": "high"
+      },
+      "tools": []
+    }
+  },
+  "adaptorType": "AiAgentImport"
+}
