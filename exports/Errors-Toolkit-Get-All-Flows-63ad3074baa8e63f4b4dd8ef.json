@@ -1,0 +1,39 @@
+{
+  "_id": "63ad3074baa8e63f4b4dd8ef",
+  "name": "Errors Toolkit - Get All Flows",
+  "description": "Reads flows from the integrator.io API, 20 per page. A preSavePage script drops disabled flows and flows in sandbox integrations, then lists every export and import step, including steps inside router branches.",
+  "_connectionId": "ac7b22c25dc5cabb0fde3bba",
+  "apiIdentifier": "e2558c795a",
+  "asynchronous": true,
+  "hooks": {
+    "preSavePage": {
+      "function": "preSavePage",
+      "_scriptId": "f2d739b17268400745b02882"
+    }
+  },
+  "oneToMany": false,
+  "http": {
+    "relativeURI": "/v1/flows?limit=20",
+    "method": "GET",
+    "requestMediaType": "json",
+    "successMediaType": "json",
+    "errorMediaType": "json",
+    "_httpConnectorVersionId": "6384b4ad7fe100355d2bd647",
+    "_httpConnectorResourceId": "6384b4ad7fe100355d2bd653",
+    "_httpConnectorEndpointId": "651be8f5d161d113bfb489db",
+    "isRest": false,
+    "sendAuthForFileDownloads": false,
+    "followRedirects": true,
+    "formType": "http",
+    "paging": {
+      "method": "linkheader"
+    },
+    "response": {
+      "twoDArray": {
+        "doNotNormalize": false,
+        "hasHeader": false
+      }
+    }
+  },
+  "adaptorType": "HTTPExport"
+}
