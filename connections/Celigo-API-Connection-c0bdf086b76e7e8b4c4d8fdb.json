@@ -1,0 +1,26 @@
+{
+  "_id": "c0bdf086b76e7e8b4c4d8fdb",
+  "type": "http",
+  "name": "Celigo API Connection",
+  "assistant": "integratorceligoapi",
+  "http": {
+    "formType": "assistant",
+    "mediaType": "json",
+    "successMediaType": "json",
+    "errorMediaType": "json",
+    "baseURI": "https://api.integrator.io",
+    "concurrencyLevel": 25,
+    "targetConcurrencyLevel": 25,
+    "_httpConnectorId": "6893ca9f5cf4b782a81e9000",
+    "_httpConnectorVersionId": "6893ca9fb8251b58bab65000",
+    "auth": {
+      "type": "oauth",
+      "oauth": {
+        "tokenURI": "https://api.integrator.io/v1/oauth/accessToken",
+        "accessTokenPath": "access_token",
+        "grantType": "clientcredentials",
+        "clientCredentialsLocation": "body"
+      }
+    }
+  }
+}
