@@ -1,0 +1,75 @@
+{
+  "_id": "e4bcdcb1d1ea51caf2a21f49",
+  "name": "Agentic Error Summary for Outlook",
+  "description": "Emails a summary of recent integrator.io flow errors. Three chained flows list the flow steps in the account, collect the errors from the lookback window, and have an AI agent write a summary that is sent through Outlook Mail. The recipient address is set in the Email Error Summary with Outlook preMap script.",
+  "install": [],
+  "settings": {
+    "lookbackinterval": "3600000",
+    "lookbackvalue": 24
+  },
+  "_registeredLookupCacheIds": [],
+  "_registeredTopicIds": [],
+  "aliases": [
+    {
+      "_connectionId": "c0bdf086b76e7e8b4c4d8fdb",
+      "alias": "celigoconnection"
+    }
+  ],
+  "settingsForm": {
+    "form": {
+      "fieldMap": {
+        "lookbackinterval": {
+          "name": "lookbackinterval",
+          "type": "select",
+          "helpText": "Unit for the lookback value.",
+          "id": "lookbackinterval",
+          "label": "Lookback interval",
+          "options": [
+            {
+              "items": [
+                {
+                  "label": "Minutes",
+                  "value": "60000"
+                },
+                {
+                  "label": "Hours",
+                  "value": "3600000"
+                },
+                {
+                  "label": "Days",
+                  "value": "86400000"
+                }
+              ]
+            }
+          ],
+          "required": true
+        },
+        "lookbackvalue": {
+          "name": "lookbackvalue",
+          "type": "text",
+          "helpText": "Only errors that occurred within this many intervals are included in the summary.",
+          "id": "lookbackvalue",
+          "inputType": "number",
+          "label": "Lookback value",
+          "required": true
+        }
+      },
+      "layout": {
+        "type": "column",
+        "containers": [
+          {
+            "fields": [
+              "lookbackvalue",
+              "lookbackinterval"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "installSteps": [],
+  "uninstallSteps": [],
+  "changeEditionSteps": [],
+  "flowGroupings": [],
+  "apiGroupings": []
+}
