@@ -1,0 +1,59 @@
+{
+  "_id": "fa6932fe115da05b409425ba",
+  "name": "Email Error Summary with Outlook",
+  "description": "Sends the HTML summary email through the Outlook Mail Connection using the Microsoft Graph sendMail call. A preMap script builds the message and sets the recipient.",
+  "_connectionId": "3948838af89d9b88766cd7bf",
+  "apiIdentifier": "i8c5534844",
+  "hooks": {
+    "preMap": {
+      "function": "buildOutlookMessages",
+      "_scriptId": "b46b6e7e204083e13a8fc955"
+    }
+  },
+  "mappings": [
+    {
+      "extract": "$.message",
+      "generate": "message",
+      "dataType": "object",
+      "status": "Active",
+      "sourceDataType": "object"
+    },
+    {
+      "extract": "$.saveToSentItems",
+      "generate": "saveToSentItems",
+      "dataType": "boolean",
+      "status": "Active",
+      "sourceDataType": "boolean"
+    }
+  ],
+  "inputContext": "record",
+  "http": {
+    "type": "records",
+    "relativeURI": [
+      "/me/sendMail"
+    ],
+    "method": [
+      "POST"
+    ],
+    "body": [],
+    "batchSize": 1,
+    "requestMediaType": "json",
+    "successMediaType": "json",
+    "errorMediaType": "json",
+    "requestType": [
+      "CREATE"
+    ],
+    "sendPostMappedData": true,
+    "_httpConnectorVersionId": "6554c9b7b7d3560b91a2e000",
+    "_httpConnectorResourceId": "6554c9b7b7d3560b91a2e001",
+    "_httpConnectorEndpointIds": [
+      "6554c9b7b7d3560b91a2e047"
+    ],
+    "isRest": false,
+    "formType": "assistant",
+    "response": {
+      "errorPath": "error.message"
+    }
+  },
+  "adaptorType": "HTTPImport"
+}
