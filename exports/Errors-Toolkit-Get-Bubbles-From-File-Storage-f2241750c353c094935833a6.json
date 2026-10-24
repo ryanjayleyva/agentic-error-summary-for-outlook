@@ -1,0 +1,61 @@
+{
+  "_id": "f2241750c353c094935833a6",
+  "name": "Errors Toolkit - Get Bubbles From File Storage",
+  "description": "Reads flowBubbleForErrorSummary.json from Celigo file storage and leaves the file in place.",
+  "_connectionId": "c0bdf086b76e7e8b4c4d8fdb",
+  "apiIdentifier": "e8145f02ce",
+  "asynchronous": true,
+  "assistant": "integratorceligoapi",
+  "http": {
+    "type": "file",
+    "relativeURI": "Agentic Error Summary for Outlook",
+    "method": "GET",
+    "isRest": false,
+    "sendAuthForFileDownloads": false,
+    "formType": "assistant",
+    "response": {
+      "resourcePath": "items"
+    }
+  },
+  "file": {
+    "output": "records",
+    "skipDelete": true,
+    "type": "json",
+    "directory": {
+      "pathMode": "relativePath"
+    },
+    "json": {
+      "resourcePath": "*"
+    },
+    "filter": {
+      "type": "expression",
+      "expression": {
+        "version": "1",
+        "rules": [
+          "startswith",
+          [
+            "string",
+            [
+              "extract",
+              "filename"
+            ]
+          ],
+          "flowBubbleForErrorSummary"
+        ]
+      },
+      "rules": [
+        "startswith",
+        [
+          "string",
+          [
+            "extract",
+            "filename"
+          ]
+        ],
+        "flowBubbleForErrorSummary"
+      ],
+      "version": "1"
+    }
+  },
+  "adaptorType": "HTTPExport"
+}
