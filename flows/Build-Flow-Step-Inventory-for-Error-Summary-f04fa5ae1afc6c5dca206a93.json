@@ -1,0 +1,44 @@
+{
+  "_id": "f04fa5ae1afc6c5dca206a93",
+  "name": "Build Flow Step Inventory for Error Summary",
+  "description": "Lists every enabled flow that is not in a sandbox integration, records each export and import step in those flows, and saves the list as flowBubbleForErrorSummary.json in Celigo file storage. When it finishes it starts the flow that collects recent errors.",
+  "pageGenerators": [
+    {
+      "_exportId": "63ad3074baa8e63f4b4dd8ef",
+      "skipRetries": false
+    }
+  ],
+  "pageProcessors": [
+    {
+      "type": "export",
+      "_exportId": "4d00073189d7e8a7088bb11a",
+      "responseMapping": {
+        "fields": [
+          {
+            "extract": "data[0].name",
+            "generate": "bubbleName"
+          }
+        ],
+        "lists": []
+      }
+    },
+    {
+      "type": "import",
+      "_importId": "9a74c5db95460a9b9a1ae157",
+      "responseMapping": {
+        "fields": [],
+        "lists": []
+      }
+    }
+  ],
+  "runPageGeneratorsInParallel": true,
+  "autoResolveMatchingTraceKeys": true,
+  "aiDescription": {
+    "summary": "This flow retrieves enabled flows from integrator.io, excluding sandbox flows, and lists their export and import steps. It uses an HTTP GET request with paging to fetch flow data, applies a preSavePage hook to filter results, and runs page generators in parallel for efficiency. A lookup step fetches step names for clarity, and an import step saves the compiled list as a JSON file in Celigo file storage. The flow also triggers another flow for error monitoring upon completion, streamlining flow documentation and error management.",
+    "detailed": "This flow is designed to generate a comprehensive inventory of enabled flows within an account, excluding those in sandbox integrations, and to record the export and import steps within those flows. The flow begins with an export step that retrieves flow data from the integrator.io API. This export uses an HTTP GET request to fetch flow details in pages of 20 records each. A preSavePage hook is applied to filter out disabled flows and flows in sandbox integrations before saving the data. The export step also includes paging functionality to handle multiple pages of data returned by the API. The retrieved data is then processed to list every export and import step, including those within router branches. The flow is configured to run page generators in parallel, optimizing performance by processing multiple pages simultaneously. Additionally, the flow has an auto-resolve feature enabled, which automatically resolves errors with matching trace keys, ensuring smoother error handling during execution. After the initial export, the flow includes a lookup step to fetch the name of each export or import step from the integrator.io API. This lookup uses an HTTP GET request to retrieve the name of a specific step based on its type (export or import) and adds this information to the step list. The lookup enhances the data by providing meaningful names for each step, making the final output more user-friendly. Finally, the flow includes an import step that saves the compiled list of flow steps as a JSON file named 'flowBubbleForErrorSummary.json' in Celigo file storage. This step uses an HTTP POST request to upload the file, ensuring that the data is stored securely and can be accessed later for analysis or reporting. The import step is configured to handle the data as a single JSON file without aggregation, preserving the structure of the compiled step list. Once this flow completes, it triggers another flow to collect recent errors, creating a seamless process for error monitoring and resolution. Overall, this flow automates the process of documenting flow configurations and steps, providing a clear and organized summary of the account's integration setup while also facilitating error management.",
+    "generatedOn": "2026-10-24T16:18:10.075Z"
+  },
+  "_runNextFlowIds": [
+    "62e118fbe80268ab0e12e442"
+  ]
+}
