@@ -1,0 +1,37 @@
+{
+  "_id": "2d5dcb1fd6af24a161d94528",
+  "name": "Errors Toolkit - Get Errors Per Bubble",
+  "description": "Lookup that fetches the open errors for one flow step from the integrator.io API. A preSavePage script keeps only errors that occurred within the lookback window.",
+  "_connectionId": "ac7b22c25dc5cabb0fde3bba",
+  "apiIdentifier": "eddf1544eb",
+  "asynchronous": true,
+  "isLookup": true,
+  "hooks": {
+    "preSavePage": {
+      "function": "preSavePage",
+      "_scriptId": "c9348e2c6a2e9e13e185b75d"
+    }
+  },
+  "oneToMany": false,
+  "http": {
+    "relativeURI": "/v1/flows/{{record.flowId}}/{{record.bubbleId}}/errors",
+    "method": "GET",
+    "requestMediaType": "json",
+    "successMediaType": "json",
+    "errorMediaType": "json",
+    "_httpConnectorVersionId": "6384b4ad7fe100355d2bd647",
+    "_httpConnectorResourceId": "6384b4ad7fe100355d2bd667",
+    "_httpConnectorEndpointId": "651be8f5d161d113bfb489ef",
+    "isRest": false,
+    "sendAuthForFileDownloads": false,
+    "followRedirects": true,
+    "formType": "http",
+    "response": {
+      "twoDArray": {
+        "doNotNormalize": false,
+        "hasHeader": false
+      }
+    }
+  },
+  "adaptorType": "HTTPExport"
+}
