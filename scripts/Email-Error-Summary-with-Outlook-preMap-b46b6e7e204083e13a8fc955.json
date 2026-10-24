@@ -1,0 +1,9 @@
+{
+  "_id": "b46b6e7e204083e13a8fc955",
+  "lastModified": "2026-10-24T16:11:42.037Z",
+  "createdAt": "2026-10-24T15:53:58.117Z",
+  "name": "Email Error Summary with Outlook preMap",
+  "description": "preMap script for the Outlook email import. It builds the Microsoft Graph sendMail message from the AI subject and HTML body, and holds the recipient address.",
+  "sandbox": false,
+  "postResponseHookToProcessOnChildRecord": false
+}
