@@ -1,0 +1,66 @@
+{
+  "_id": "ac7b22c25dc5cabb0fde3bba",
+  "type": "http",
+  "name": "Integrator IO",
+  "assistant": "integratorio",
+  "http": {
+    "formType": "assistant",
+    "mediaType": "json",
+    "successMediaType": "json",
+    "errorMediaType": "json",
+    "baseURI": "https://api{{{connection.settings.region}}}integrator.io",
+    "concurrencyLevel": 25,
+    "targetConcurrencyLevel": 25,
+    "ping": {
+      "relativeURI": "/v1/connections",
+      "method": "GET"
+    },
+    "_httpConnectorId": "6384b4ad7fe100355d2bd646",
+    "_httpConnectorVersionId": "6384b4ad7fe100355d2bd647",
+    "auth": {
+      "type": "token",
+      "token": {
+        "location": "header",
+        "headerName": "Authorization",
+        "scheme": "Bearer",
+        "paramName": "access_token"
+      }
+    }
+  },
+  "settingsForm": {
+    "form": {
+      "fieldMap": {
+        "region": {
+          "id": "region",
+          "name": "region",
+          "type": "radiogroup",
+          "label": "Region",
+          "helpText": "Choose your integrator.io account region. <br><b>North America:</b> If your account URL is https://integrator.io/home. <br><b>Europe:</b> If your account URL is https://eu.integrator.io/home.",
+          "required": true,
+          "options": [
+            {
+              "items": [
+                {
+                  "label": "North America",
+                  "value": "."
+                },
+                {
+                  "label": "Europe",
+                  "value": ".eu."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "layout": {
+        "fields": [
+          "region"
+        ]
+      }
+    }
+  },
+  "settings": {
+    "region": "."
+  }
+}
