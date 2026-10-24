@@ -1,0 +1,9 @@
+{
+  "_id": "c9348e2c6a2e9e13e185b75d",
+  "lastModified": "2026-10-24T16:11:42.330Z",
+  "createdAt": "2026-10-24T15:54:00.583Z",
+  "name": "Errors Toolkit - Error Filter",
+  "description": "preSavePage script for the Get Errors Per Bubble export. It keeps errors whose occurredAt time falls inside the lookback window from the integration settings and drops steps left with no errors.",
+  "sandbox": false,
+  "postResponseHookToProcessOnChildRecord": false
+}
