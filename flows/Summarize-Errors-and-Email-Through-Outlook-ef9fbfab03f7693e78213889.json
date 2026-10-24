@@ -1,0 +1,44 @@
+{
+  "_id": "ef9fbfab03f7693e78213889",
+  "name": "Summarize Errors and Email Through Outlook",
+  "description": "Reads errorsByBubble.json from Celigo file storage and deletes the file after reading it, asks an AI agent to write an email subject and HTML body that groups the errors by flow, and sends the email through Outlook Mail. When no errors were found the email says so.",
+  "pageGenerators": [
+    {
+      "_exportId": "60667a2c011356bfd76032e1",
+      "skipRetries": false
+    }
+  ],
+  "pageProcessors": [
+    {
+      "type": "import",
+      "_importId": "a67db2baa3cbb9283a4180cb",
+      "responseMapping": {
+        "fields": [
+          {
+            "extract": "_json.blocks",
+            "generate": "blocks"
+          },
+          {
+            "extract": "_json.subject",
+            "generate": "email_subject"
+          },
+          {
+            "extract": "_json.body_html",
+            "generate": "email_body_html"
+          }
+        ],
+        "lists": []
+      }
+    },
+    {
+      "type": "import",
+      "_importId": "fa6932fe115da05b409425ba",
+      "responseMapping": {
+        "fields": [],
+        "lists": []
+      }
+    }
+  ],
+  "runPageGeneratorsInParallel": true,
+  "autoResolveMatchingTraceKeys": true
+}
