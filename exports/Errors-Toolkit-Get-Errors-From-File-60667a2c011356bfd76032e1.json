@@ -1,0 +1,67 @@
+{
+  "_id": "60667a2c011356bfd76032e1",
+  "name": "Errors Toolkit - Get Errors From File",
+  "description": "Reads errorsByBubble.json from Celigo file storage and deletes the file after reading it. A preSavePage script wraps the records in a flowBubbles list for the AI agent.",
+  "_connectionId": "c0bdf086b76e7e8b4c4d8fdb",
+  "apiIdentifier": "e96f188a6d",
+  "asynchronous": true,
+  "hooks": {
+    "preSavePage": {
+      "function": "preSavePage",
+      "_scriptId": "6e1222b249038d29269916ee"
+    }
+  },
+  "assistant": "integratorceligoapi",
+  "http": {
+    "type": "file",
+    "relativeURI": "Agentic Error Summary for Outlook",
+    "method": "GET",
+    "isRest": false,
+    "sendAuthForFileDownloads": false,
+    "formType": "assistant",
+    "response": {
+      "resourcePath": "items"
+    }
+  },
+  "file": {
+    "output": "records",
+    "skipDelete": false,
+    "type": "json",
+    "directory": {
+      "pathMode": "relativePath"
+    },
+    "json": {
+      "resourcePath": "*"
+    },
+    "filter": {
+      "type": "expression",
+      "expression": {
+        "version": "1",
+        "rules": [
+          "startswith",
+          [
+            "string",
+            [
+              "extract",
+              "filename"
+            ]
+          ],
+          "errorsByBubble"
+        ]
+      },
+      "rules": [
+        "startswith",
+        [
+          "string",
+          [
+            "extract",
+            "filename"
+          ]
+        ],
+        "errorsByBubble"
+      ],
+      "version": "1"
+    }
+  },
+  "adaptorType": "HTTPExport"
+}
