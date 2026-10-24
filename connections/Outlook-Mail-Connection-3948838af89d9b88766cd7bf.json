@@ -1,0 +1,34 @@
+{
+  "_id": "3948838af89d9b88766cd7bf",
+  "type": "http",
+  "name": "Outlook Mail Connection",
+  "assistant": "microsoftoutlookmail",
+  "http": {
+    "formType": "assistant",
+    "mediaType": "json",
+    "baseURI": "https://graph.microsoft.com/v1.0",
+    "concurrencyLevel": 25,
+    "targetConcurrencyLevel": 25,
+    "ping": {
+      "relativeURI": "/me",
+      "method": "GET"
+    },
+    "_httpConnectorId": "6554c9b7b7d3560b91a2dfff",
+    "_httpConnectorVersionId": "6554c9b7b7d3560b91a2e000",
+    "auth": {
+      "type": "oauth",
+      "oauth": {
+        "scope": [
+          "Mail.Send",
+          "User.Read",
+          "offline_access"
+        ]
+      },
+      "token": {
+        "headerName": "Authorization",
+        "scheme": " ",
+        "paramName": "access_token"
+      }
+    }
+  }
+}
