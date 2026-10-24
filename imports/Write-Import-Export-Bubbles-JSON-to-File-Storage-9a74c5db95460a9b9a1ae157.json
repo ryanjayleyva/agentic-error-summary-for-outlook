@@ -1,0 +1,42 @@
+{
+  "_id": "9a74c5db95460a9b9a1ae157",
+  "name": "Write Import/Export Bubbles JSON to File Storage",
+  "description": "Saves the step list as flowBubbleForErrorSummary.json in the Celigo file storage folder for this integration.",
+  "_connectionId": "c0bdf086b76e7e8b4c4d8fdb",
+  "apiIdentifier": "iffc0cd252",
+  "oneToMany": false,
+  "assistant": "integratorceligoapi",
+  "file": {
+    "fileName": "flowBubbleForErrorSummary.json",
+    "skipAggregation": false,
+    "type": "json",
+    "directory": {
+      "pathMode": "relativePath"
+    },
+    "aggregation": {
+      "type": "all"
+    },
+    "json": {
+      "body": ""
+    }
+  },
+  "http": {
+    "type": "file",
+    "relativeURI": [
+      "Agentic Error Summary for Outlook"
+    ],
+    "method": [
+      "POST"
+    ],
+    "body": [],
+    "sendPostMappedData": true,
+    "isRest": false,
+    "formType": "assistant",
+    "response": {
+      "resourcePath": [
+        "items"
+      ]
+    }
+  },
+  "adaptorType": "HTTPImport"
+}
