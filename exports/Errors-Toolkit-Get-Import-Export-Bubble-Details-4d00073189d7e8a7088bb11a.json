@@ -1,0 +1,28 @@
+{
+  "_id": "4d00073189d7e8a7088bb11a",
+  "name": "Errors Toolkit - Get Import/Export Bubble Details",
+  "description": "Lookup that fetches the name of one export or import step from the integrator.io API so the name can be added to the step list.",
+  "_connectionId": "ac7b22c25dc5cabb0fde3bba",
+  "apiIdentifier": "ebfa7865e6",
+  "asynchronous": true,
+  "isLookup": true,
+  "oneToMany": false,
+  "http": {
+    "relativeURI": "/v1/{{#compare record.type \"==\" \"export\"}}exports{{else}}imports{{/compare}}/{{record.bubbleId}}",
+    "method": "GET",
+    "requestMediaType": "json",
+    "successMediaType": "json",
+    "errorMediaType": "json",
+    "isRest": false,
+    "sendAuthForFileDownloads": false,
+    "followRedirects": true,
+    "formType": "http",
+    "response": {
+      "twoDArray": {
+        "doNotNormalize": false,
+        "hasHeader": false
+      }
+    }
+  },
+  "adaptorType": "HTTPExport"
+}
