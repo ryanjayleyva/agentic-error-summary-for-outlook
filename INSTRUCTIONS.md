@@ -91,7 +91,7 @@ Update the script with the real Outlook email address.
 - Flow `Summarize Errors and Email Through Outlook`
 - Step `Email Error Summary with Outlook` (the import that sends the email)
 - Script `Email Error Summary with Outlook preMap`
-  (`scripts/Email-Error-Summary-with-Outlook-preMap-<id>.js` in this repo)
+  (`scripts/Email-Error-Summary-with-Outlook-preMap.js` in this repo)
 
 Open Resources, then Scripts, and edit the script. Replace the placeholder
 at the top.
