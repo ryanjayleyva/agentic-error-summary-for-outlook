@@ -20,7 +20,7 @@ summary.
 
 ## Repo layout
 
-```
+```bash
 assets/           screenshot used in this README
 dist/             importable zip
 flows/            the three flows
@@ -32,4 +32,6 @@ integration.json  integration settings and the lookback form
 INSTRUCTIONS.md   setup steps after the upload
 ```
 
-The unzipped files in this repo are the same content as the zip.
+The files in this repo are for reference. They contain configuration that
+integrator.io does not recognize, so upload [the zip in `dist/`](dist/agentic-error-summary-for-outlook.zip)
+instead of zipping them yourself.
